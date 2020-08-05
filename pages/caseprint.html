@@ -234,7 +234,7 @@
   <al-if expr="contacts">
    <al-expand name="printcontacts" />
   </al-if>
-  <al-if expr="hasattr(__ctx__, 'edit_form')">
+  <al-if expr="hasattr(__ctx__.locals, 'edit_form')">
    <al-exec expr="form = edit_form.get_form_ui()" />
    <al-expand name="caseprint_form" />
   <al-else>     

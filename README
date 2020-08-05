@@ -195,20 +195,27 @@ PREREQUISITES FOR SERVER INSTALLATION
 
         Compile PostgreSQL with defaults. 
 
-        Make sure your PostgreSQL installation has a "root" user that can
-        create new databases and users (issue the command "createuser -a
-        -d root" if needed).
+    Make sure your PostgreSQL installation has a "root" user that can
+    create new databases and users:
 
-        You will probably also need to edit the PostgreSQL pg_hba.conf 
-	configuration file to allow the user in whose context the web 
-	server (httpd) runs access to the database. For Debian-based systems,
-	something like this may need to be added:
-	
-	    local all www-data sameuser;
-	   
-	Or for Red Hat/Fedora Core-based systems:
+        sudo -u posgres createuser --superuser root
 
-	    local all apache sameuser;
+    as well as a database user corresponding to the web server user
+    (www-data on Debian/Ubuntu, apache on Red Hat/Fedora Core):
+
+        sudo -u posgres createuser --no-superuser --no-createdb \
+            --no-createrole www-data
+
+    You will probably also need to edit the PostgreSQL pg_hba.conf
+    configuration file to allow the user in whose context the web server
+    (httpd) runs access to the database. For Debian-based systems, something
+    like this may need to be added:
+
+        local all www-data sameuser;
+
+    Or for Red Hat/Fedora Core-based systems:
+
+        local all apache sameuser;
 	
 
 6)  A Python-to-PostgreSQL interface module:

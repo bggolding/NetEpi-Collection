@@ -75,6 +75,10 @@ body {
     font-weight: bold;
 }
 
+.wikitext p, .wikitext ul {
+    margin: 0 0 1ex 0;
+}
+
 .butt {
     width: 6em;
 }

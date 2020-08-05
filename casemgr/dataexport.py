@@ -386,7 +386,7 @@ class CaseExporter:
         query = globals.db.query('cases', distinct=True)
         query.join('LEFT JOIN case_form_summary USING (case_id)')
         query.where('syndrome_id = %s', syndrome_id)
-        if deleted != 'n':
+        if deleted == 'n':
             query.where('NOT case_form_summary.deleted')
         caseaccess.acl_query(query, self.credentials, deleted=deleted)
         forms_used = set()

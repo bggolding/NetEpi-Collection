@@ -26,14 +26,17 @@ try:
     from ocpgdb import *
     connect_extra = dict(use_mx_datetime=True)
 except ImportError:
-    from pyPgSQL import PgSQL
-    PgSQL.useUTCtimeValue = True       # Works around brokeness in some vers
-    PgSQL.fetchReturnsList = True      # faster, and duplicates dbobj work
-    from pyPgSQL.PgSQL import *
-    Binary = PgBytea
-    # pyPgSQL predates python True and False
-    TRUE = PG_True
-    FALSE = PG_False
+    try:
+        from pyPgSQL import PgSQL
+        PgSQL.useUTCtimeValue = True       # Works around brokeness in some vers
+        PgSQL.fetchReturnsList = True      # faster, and duplicates dbobj work
+        from pyPgSQL.PgSQL import *
+        Binary = PgBytea
+        # pyPgSQL predates python True and False
+        TRUE = PG_True
+        FALSE = PG_False
+    except ImportError:
+        raise ImportError('No compatible DB-API module found. Tried ocpgdb and pyPgSQL')
 
 # Some fine-grained exceptions. Not part of the API, but this is a convenient
 # place to define them.

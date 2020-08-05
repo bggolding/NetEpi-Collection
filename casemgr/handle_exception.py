@@ -32,7 +32,8 @@ def simple_template(req, template_path, template_name, locals_dict = {}):
     req.write_header('Content-Type', 'text/html')
     req.end_headers()
     tmp_ctx = albatross.SimpleContext(template_path)
-    tmp_ctx.locals = LocalsDict(locals_dict)
+    for k, v in locals_dict.iteritems():
+        setattr(tmp_ctx.locals, k, v)
     templ = tmp_ctx.load_template(template_name)
     templ.to_html(tmp_ctx)
     tmp_ctx.flush_content()

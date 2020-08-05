@@ -161,9 +161,6 @@ class PageOps(page_common.PageOpsBase):
         ctx.locals.section_edit = ctx.locals.form_meta.root.new_section(path)
 
     def do_edit(self, ctx, path):
-        if ctx.locals.section_edit:
-            ctx.locals.section_edit.rollback()
-            ctx.locals.section_edit = None
         root = ctx.locals.form_meta.root
         if path[0] == 'Q':
             ctx.push_page('admin_form_edit_question', root.edit_question(path))

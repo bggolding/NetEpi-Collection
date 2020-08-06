@@ -1,0 +1,37 @@
+version: '3.7'
+
+# you will need to run the commands once first:
+#   docker network create netepi-db-network
+#   docker volume create netepi-postgres-data
+# before starting the containers with:
+#   docker-compose up -d
+# connect to http://localhost:9980
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - netepi-postgres-data:/var/lib/postgresql/data
+    networks:
+      netepi-db-network: {}
+
+  netepi:
+    build:
+      context: .
+    networks:
+      default: {}
+      netepi-db-network: {}
+    ports:
+      - "9980:80"
+
+volumes:
+  netepi-postgres-data:
+    external: true
+
+networks:
+  netepi-db-network:
+    external: true

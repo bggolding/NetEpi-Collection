@@ -50,6 +50,18 @@ class OSX(PlatformBase):
         self.web_user = pwd.getpwnam('www').pw_name
         return True
 
+
+class AlpineLinux(PlatformBase):
+    platform = "Alpine Linux"
+    html_dir = '/var/www/html'
+    cgi_dir = '/var/www/cgi-bin'
+    web_user = 'apache'
+
+    def is_platform(self):
+        return sys.platform == 'linux2' \
+            and os.path.exists('/etc/alpine-release')
+
+
 def get_platform():
     platforms = []
     for name, var in globals().items():

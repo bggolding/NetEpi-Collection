@@ -33,5 +33,4 @@ volumes:
     external: true
 
 networks:
-  netepi-db-network:
-    external: true
+  netepi-db-network: {}

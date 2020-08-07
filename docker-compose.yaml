@@ -1,7 +1,6 @@
 version: '3.7'
 
-# you will need to run the commands once first:
-#   docker network create netepi-db-network
+# you will need to run the command once first:
 #   docker volume create netepi-postgres-data
 # before starting the containers with:
 #   docker-compose up -d

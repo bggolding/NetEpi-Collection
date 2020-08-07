@@ -1,6 +1,6 @@
 FROM python:2
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y libpq5 apache2 postgresql-client python-matplotlib graphviz
 RUN pip install pip --upgrade
 
 WORKDIR /build
@@ -10,8 +10,6 @@ RUN cd albatross*; python setup.py install
 
 RUN easy_install egenix-mx-base
 RUN pip install ocpgdb
-
-RUN apt-get install -y libpq5 apache2 postgresql-client
 
 WORKDIR /opt/netepi
 ADD . .

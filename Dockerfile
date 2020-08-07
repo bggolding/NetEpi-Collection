@@ -13,8 +13,12 @@ RUN pip install ocpgdb
 
 WORKDIR /opt/netepi
 ADD . .
-RUN python install.py appname=collection create_db=false dsn='postgres:example@db::collection:'
+RUN python install.py appname=collection create_db=false dsn='::collection:'
+
+# this fixes a wacky bug with sysconfig on Debian (https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=783738)
+RUN cd /usr/lib/python2.7/; ln -s plat-x86_64-linux-gnu/_sysconfigdata_nd.py .
+
+RUN a2enmod cgi
 
 EXPOSE 80
-CMD apachectl -D FOREGROUND
-
+CMD albatross session-server start && apachectl -D FOREGROUND

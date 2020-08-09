@@ -50,5 +50,5 @@ CMD albatross session-server start \
     && chown www-data:www-data /usr/lib/cgi-bin/collection/db \
     && chmod ug+w /usr/lib/cgi-bin/collection/db \
 #	&& (sleep 5; su postgres -c "python /src/tools/compile_db.py '::collection:' /usr/lib/cgi-bin/collection") \
-	&& (sleep 5; python /src/tools/compile_db.py '::collection:' /usr/lib/cgi-bin/collection) \
+	&& (sleep 5; yes 00NetEpi | python /src/tools/compile_db.py '::collection:' /usr/lib/cgi-bin/collection) \
 	&& apachectl -D FOREGROUND

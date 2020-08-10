@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 
 # you will need to run the commands once first:
 #   docker volume create netepi-postgres-data

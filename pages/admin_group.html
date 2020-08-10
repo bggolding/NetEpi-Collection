@@ -19,7 +19,7 @@
 </al-comment>
 
 <al-expand name="page_layout_admin">
- <al-setarg name="title"><al-value expr="config.group_label" /> <al-value expr="repr(group.group_name)" /></al-setarg>
+ <al-setarg name="title"><al-value expr="config.group_label" /> "<al-value expr="group.group_name" />"</al-setarg>
   <table border="0" class="admin-u">
    <tr>
     <th colspan="2">Edit <al-value expr="config.group_label" /></th>

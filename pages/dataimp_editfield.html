@@ -143,7 +143,7 @@
 </al-macro>
 
 <al-expand name="page_layout_banner">
- <al-setarg name="title">Import rule for <al-value expr="repr(editfield.label)" /> field</al-setarg>
+ <al-setarg name="title">Import rule for "<al-value expr="editfield.label" />" field</al-setarg>
  <div class="ttabs">
   <al-for iter="b_i" expr="editfield.actions">
    <al-exec expr="action = b_i.value()" />

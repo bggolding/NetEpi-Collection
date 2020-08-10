@@ -32,20 +32,22 @@
           <al-td colspanexpr="tree_i.depth() - 1" class="line"></al-td>
          </al-if>
          <al-td colspanexpr="tree_i.span() + 2" class="line hover-expand">
-          <al-input type="image" alt="add" class="he-opener"
-                srcexpr="appath('images/plus.png')"
-                nameexpr="'add:%s' % node.id()" />
-          <span class="he-open">
-           <al-input type="image" alt="add question"
-                 srcexpr="appath('images/add-question.png')"
-                 nameexpr="'add_question:%s' % node.id()" />
-           <al-input type="image" alt="add section"
-                 srcexpr="appath('images/add-section.png')"
-                 nameexpr="'add_section:%s' % node.id()" />
-           <al-if expr="form_cutbuff">
-            <al-input type="image" alt="paste"
-                  srcexpr="appath('images/add-paste.png')"
-                  nameexpr="'paste:%s' % node.id()" />
+          <al-if expr="not section_edit">
+           <al-input type="image" alt="add" class="he-opener"
+                 srcexpr="appath('images/plus.png')"
+                 nameexpr="'add:%s' % node.id()" />
+           <span class="he-open">
+            <al-input type="image" alt="add question"
+                  srcexpr="appath('images/add-question.png')"
+                  nameexpr="'add_question:%s' % node.id()" />
+            <al-input type="image" alt="add section"
+                  srcexpr="appath('images/add-section.png')"
+                  nameexpr="'add_section:%s' % node.id()" />
+            <al-if expr="form_cutbuff">
+             <al-input type="image" alt="paste"
+                   srcexpr="appath('images/add-paste.png')"
+                   nameexpr="'paste:%s' % node.id()" />
+            </al-if>
            </al-if>
           </span>
          </al-td>

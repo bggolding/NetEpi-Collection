@@ -1,0 +1,51 @@
+version: '3.7'
+
+# you will need to run the commands once first:
+#   docker volume create netepi-postgres-data
+#   docker volume create netepi-pickled-db-describer
+# before starting the containers with:
+#   docker-compose up -d
+# connect to http://localhost:9980
+
+services:
+
+  db:
+    image: postgres:11
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      TZ: Australia/Melbourne
+    volumes:
+      - netepi-postgres-data:/var/lib/postgresql/data
+      - netepi-postgres-socket:/run/postgresql
+    networks:
+      netepi-db-network: {}
+
+  netepi:
+    build:
+      context: .
+    environment:
+      ALBATROSS_SESSION_SERVER: albatross-session-server
+      TZ: Australia/Melbourne
+    networks:
+      default: {}
+      netepi-db-network: {}
+    volumes:
+      - netepi-postgres-socket:/run/postgresql
+      - netepi-pickled-db-describer:/usr/lib/cgi-bin/collection/db
+    ports:
+      - "9980:80"
+
+#  albatross-session-server:
+#    build:
+#      context: session-server
+
+volumes:
+  netepi-postgres-data:
+    external: true
+  netepi-pickled-db-describer:
+    external: true
+  netepi-postgres-socket: {}
+
+networks:
+  netepi-db-network: {}

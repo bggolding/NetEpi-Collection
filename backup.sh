@@ -5,7 +5,7 @@
 #  PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #  17 21 * * *   root   /opt/netepi/backup.sh
 
-BACKUP_DB_CMD=./netepi-db_backup.sh
+BACKUP_DB_CMD=./netepi-db-backup.sh
 
 BACKUP_DIR=./backup
 

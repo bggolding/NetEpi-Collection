@@ -2,7 +2,7 @@
 # Build the base image (minimal distro packages needed to run)
 FROM python:2.7-slim AS base
 
-RUN apt-get update && apt-get install -y libpq5 apache2 wget python-matplotlib graphviz
+RUN apt-get update && apt-get install -y libpq5 apache2 wget
 RUN pip install pip --upgrade
 
 #------------------------------------------------------------------------------
@@ -16,6 +16,7 @@ WORKDIR /build
 RUN pip wheel ocpgdb
 RUN wget -q http://www.object-craft.com.au/projects/albatross/download/${ALBATROSS}.tar.gz \
 	&& pip wheel ${ALBATROSS}.tar.gz
+RUN pip wheel matplotlib graphviz
 
 #------------------------------------------------------------------------------
 # Revert to building from the smaller base image for the rest of the process
@@ -34,9 +35,6 @@ RUN python install.py \
 	create_db=false dsn='::collection:' \
 	html_target=/var/www/html/collection
 
-# this fixes a wacky bug with sysconfig on Debian (https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=783738)
-#RUN cd /usr/lib/python2.7/; ln -s plat-x86_64-linux-gnu/_sysconfigdata_nd.py .
-
 WORKDIR /usr/lib/cgi-bin/collection
 
 RUN mkdir db && chown www-data: db
@@ -49,6 +47,5 @@ EXPOSE 80
 CMD albatross session-server start \
     && chown www-data:www-data /usr/lib/cgi-bin/collection/db \
     && chmod ug+w /usr/lib/cgi-bin/collection/db \
-#	&& (sleep 5; su postgres -c "python /src/tools/compile_db.py '::collection:' /usr/lib/cgi-bin/collection") \
 	&& (sleep 5; yes 00NetEpi | python /src/tools/compile_db.py '::collection:' /usr/lib/cgi-bin/collection) \
 	&& apachectl -D FOREGROUND

@@ -2,7 +2,7 @@
 # Build the base image (minimal distro packages needed to run)
 FROM python:2.7-slim AS base
 
-RUN apt-get update && apt-get install -y libpq5 apache2 wget
+RUN apt-get update && apt-get install -y libpq5 apache2 libapache2-mod-fcgid wget less
 RUN pip install pip --upgrade
 
 #------------------------------------------------------------------------------
@@ -37,11 +37,9 @@ RUN python install.py \
 
 WORKDIR /usr/lib/cgi-bin/collection
 
-RUN mkdir db && chown www-data: db
-
 RUN a2enmod cgi
 
-RUN useradd -u 120 postgres
+COPY deploy/apache.conf /etc/apache2/sites-enabled/netepi-collection.conf
 
 EXPOSE 80
 CMD albatross session-server start \

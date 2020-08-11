@@ -36,9 +36,9 @@ services:
     ports:
       - "9980:80"
 
-#  albatross-session-server:
-#    build:
-#      context: session-server
+  albatross-session-server:
+    build:
+      context: albatross-session-server
 
 volumes:
   netepi-postgres-data:

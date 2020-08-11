@@ -33,7 +33,8 @@ ADD . .
 RUN python install.py \
 	appname=collection \
 	create_db=false dsn='::collection:' \
-	html_target=/var/www/html/collection
+	html_target=/var/www/html/collection \
+	session_server=albatross-session-server
 
 WORKDIR /usr/lib/cgi-bin/collection
 

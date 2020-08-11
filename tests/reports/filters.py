@@ -117,21 +117,21 @@ class ReportFilterTermsTest(testcommon.SchemaTestCase):
         term = PatternTerm('dummy')
         term.value = 'XX*'
         self.exercise(term, PatternDemogFieldOps, 'pattern',
-                      want_desc="matching pattern 'XX*'",
+                      want_desc='matching pattern "XX*"',
                       want_xml='<term field="dummy" op="pattern">\n <value>XX*'
                                '</value>\n</term>\n',
                       want_query='(table.dummy ILIKE %s)')
         # Now try it negated
         term.negate = True
         self.exercise(term, PatternDemogFieldOps, 'pattern',
-                      want_desc="not matching pattern 'XX*'",
+                      want_desc='not matching pattern "XX*"',
                       want_xml='<term field="dummy" op="pattern" negate="yes">'
                                '\n <value>XX*</value>\n</term>\n',
                       want_query='(NOT (table.dummy ILIKE %s))')
         # And with multiple patterns
         term.value = 'XX*, YY*'
         self.exercise(term, PatternDemogFieldOps, 'pattern',
-                      want_desc="not matching pattern 'XX*, YY*'",
+                      want_desc='not matching pattern "XX*, YY*"',
                       want_xml='<term field="dummy" op="pattern" negate="yes">'
                                '\n <value>XX*, YY*</value>\n</term>\n',
                       want_query='(NOT ((table.dummy ILIKE %s OR table.dummy '
@@ -141,13 +141,13 @@ class ReportFilterTermsTest(testcommon.SchemaTestCase):
         term = PatternTerm('dummy', form='testform')
         term.value = 'XX*'
         self.exercise(term, PatternFormFieldOps, 'pattern',
-                      want_desc="matching pattern 'XX*'",
+                      want_desc='matching pattern "XX*"',
                       want_xml='<term form="testform" field="dummy" '
                                'op="pattern">\n <value>XX*</value>\n</term>\n',
                       want_query='(formtable.dummy ILIKE %s)')
         term.negate = True
         self.exercise(term, PatternFormFieldOps, 'pattern',
-                      want_desc="not matching pattern 'XX*'",
+                      want_desc='not matching pattern "XX*"',
                       want_xml='<term form="testform" field="dummy" '
                                'op="pattern" negate="yes">\n '
                                '<value>XX*</value>\n</term>\n',

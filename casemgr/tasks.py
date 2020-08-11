@@ -212,7 +212,7 @@ def delete_queue(queue_id):
     try:
         queue.db_delete()
     except dbobj.ConstraintError:
-        raise TaskError('workqueue %r cannot be deleted as it has outstanding tasks' % queue.name)
+        raise TaskError('workqueue "%s" cannot be deleted as it has outstanding tasks' % queue.name)
 
 
 class AssignHelper:

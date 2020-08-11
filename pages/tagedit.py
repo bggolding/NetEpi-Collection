@@ -31,7 +31,7 @@ class PageOps(page_common.PageOpsBase):
             ctx.locals.tags.append(ctx.locals.tag.tag)
         ctx.locals.tag.db_update(refetch=False)
         globals.db.commit()
-        ctx.msg('info', 'Tag %r updated' % ctx.locals.tag.tag)
+        ctx.msg('info', 'Tag "%s" updated' % ctx.locals.tag.tag)
         casetags.notify()
         ctx.pop_page()
 
@@ -46,7 +46,7 @@ class PageOps(page_common.PageOpsBase):
         if ctx.locals.tag.tag_id:
             casetags.delete_tag(ctx.locals.tag.tag_id)
         globals.db.commit()
-        ctx.msg('info', 'Tag %r deleted' % ctx.locals.tag.tag)
+        ctx.msg('info', 'Tag "%s" deleted' % ctx.locals.tag.tag)
         casetags.notify()
         ctx.pop_page()
 

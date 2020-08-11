@@ -65,7 +65,7 @@ class PageOps(page_common.PageOpsBase):
     def do_viewlog(self, ctx, ignore):
         creds = ctx.locals._credentials
         log = logview.UserLogView(creds.prefs, 
-                                  'Log for user %r' % creds.user.username,
+                                  'Log for user "%s"' % creds.user.username,
                                   user_id=creds.user.user_id)
         ctx.push_page('logview', log)
 

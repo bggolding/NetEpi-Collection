@@ -43,7 +43,7 @@ class PageOps(page_common.PageOpsBase):
 
     def do_update(self, ctx, ignore):
         self.commit(ctx)
-        ctx.add_message('Updated %r' % ctx.locals.group.group_name)
+        ctx.add_message('Updated "%s"' % ctx.locals.group.group_name)
         ctx.pop_page()
 
     def do_delete(self, ctx, ignore):
@@ -56,7 +56,7 @@ class PageOps(page_common.PageOpsBase):
                 ctx.locals.confirm = None
                 raise dbobj.ConstraintError('Can\'t delete in-use groups')
             globals.db.commit()
-        ctx.add_message('Deleted %s %r' % (config.group_label, ctx.locals.group.group_name))
+        ctx.add_message('Deleted %s "%s"' % (config.group_label, ctx.locals.group.group_name))
         ctx.pop_page()
 
 pageops = PageOps()

@@ -90,8 +90,8 @@ class FormDependancyMixin:
                                 'report parameters' % saved_info['label'])
             elif info.version != saved_info['version']:
                 msgs.msg('warn', 'Form "%s" has been updated - check report '
-                                 'parameters (report version %r, now '
-                                 'version %r)' % (saved_info['label'], 
+                                 'parameters (report version "%s", now '
+                                 'version %s)' % (saved_info['label'], 
                                     saved_info['version'], info.version))
 
     def _to_xml(self, xmlgen, curnode):
@@ -342,7 +342,7 @@ def get_report_ctor(report_type):
     try:
         return report_types[report_type]
     except KeyError:
-        raise KeyError('Unknown report type %r' % report_type)
+        raise KeyError('Unknown report type "%s"' % report_type)
 
 def new_report(syndrome_id, report_type='line'):
     report_ctor = get_report_ctor(report_type)

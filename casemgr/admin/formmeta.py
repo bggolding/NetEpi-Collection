@@ -41,9 +41,9 @@ valid_identifier_re = re.compile('^[a-z][a-z0-9_]*$', re.IGNORECASE)
 def valid_form_label(label):
     dbobj.valid_identifier(label, 'form name', reserve=len('form__00000_pkey'))
     if not label.islower():
-        raise dbobj.IdentifierError('%r must be all lower case' % label)
+        raise dbobj.IdentifierError('"%s" must be all lower case' % label)
     if not valid_identifier_re.match(label):
-        raise dbobj.IdentifierError('form name %r contains invalid characters'% 
+        raise dbobj.IdentifierError('form name "%s" contains invalid characters'% 
                                     label)
 
 

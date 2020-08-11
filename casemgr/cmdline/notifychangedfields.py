@@ -126,7 +126,7 @@ def get_export_scheme_instance(cred, syndrome_id, optp, options, args):
     formnames = [form.label for form in exporter.forms]
     for name in args:
         if name not in formnames:
-            optp.error('form %r not found (for this syndrome?)' % name)
+            optp.error('form "%s" not found (for this syndrome?)' % name)
     include_forms = args
 
     es.include_forms = include_forms

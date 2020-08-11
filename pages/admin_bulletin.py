@@ -44,7 +44,7 @@ class PageOps(page_common.PageOpsBase):
         ctx.admin_log(ctx.locals.group_edit.db_desc())
         ctx.locals.group_edit.db_update()
         globals.db.commit()
-        ctx.add_message('Updated bulletin %r' % bull.title)
+        ctx.add_message('Updated bulletin "%s"' % bull.title)
 
     def revert(self, ctx):
         ctx.locals.group_edit.db_revert()
@@ -60,7 +60,7 @@ class PageOps(page_common.PageOpsBase):
                 raise page_common.ConfirmDelete
             ctx.locals.bulletin.db_delete()
             globals.db.commit()
-        ctx.add_message('Deleted bulletin %r' % ctx.locals.bulletin.title)
+        ctx.add_message('Deleted bulletin "%s"' % ctx.locals.bulletin.title)
         ctx.pop_page()
 
     def do_group_edit(self, ctx, op, *args):

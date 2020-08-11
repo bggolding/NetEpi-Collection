@@ -51,7 +51,7 @@ class PageOps(page_common.PageOpsBase):
         user = ctx.locals.ue.user
         if not user.is_new():
             log = logview.AdminLogView(ctx.locals._credentials.prefs, 
-                                       'Log for user %r' % user.username, 
+                                       'Log for user "%s"' % user.username, 
                                        user_id=user.user_id)
             ctx.push_page('logview', log)
 
@@ -61,11 +61,11 @@ class PageOps(page_common.PageOpsBase):
     def do_delete(self, ctx, ignore):
         orig_username = ctx.locals.ue.user.username
         ctx.locals.ue.delete()
-        ctx.add_message('User %r deleted' % orig_username)
+        ctx.add_message('User "%s" deleted' % orig_username)
 
     def do_undelete(self, ctx, ignore):
         ctx.locals.ue.undelete()
-        ctx.add_message('User %r undeleted' % ctx.locals.ue.user.username)
+        ctx.add_message('User "%s" undeleted' % ctx.locals.ue.user.username)
 
     def do_pt_search(self, ctx, op, *args):
         ctx.locals.pt_search.do(op, *args)

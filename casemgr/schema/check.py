@@ -55,23 +55,23 @@ def check_form_dependancies(db, db_user):
 
     # Warn for in-use, but missing defs
     for missing in in_use - defined:
-        print '    *** WARNING - definition for in-use form %r vers %s is missing!' % missing
+        print '    *** WARNING - definition for in-use form "%s" vers %s is missing!' % missing
     # Warn for deployed, but missing defs
     for missing in deployed - in_use - defined:
-        print '    *** WARNING - definition for deployed form %r vers %s is missing!' % missing
+        print '    *** WARNING - definition for deployed form "%s" vers %s is missing!' % missing
 
     # Create missing form instance tables
     for name, version in (in_use | deployed) & defined:
         table = formlib.tablename(name, version)
         if not db.db_has_relation(table):
-            print '    *** form %r vers %s instance table is missing - creating' % (name, version)
+            print '    *** form "%s" vers %s instance table is missing - creating' % (name, version)
         elif db.has_table(table):
             # Has table and describer - nothing further to do
             continue
         try:
             form = formlib.load(name, version)
         except form_ui.FormError, e:
-            print '    *** WARNING - unable to load %r, vers %s - FORM '\
+            print '    *** WARNING - unable to load "%s", vers %s - FORM '\
                   'INSTANCE TABLE NOT CREATED!' % (name, version)
             print '        %s' % e
         deploy.make_form_table(db, form, table)
@@ -82,7 +82,7 @@ def check_form_dependancies(db, db_user):
             if name not in highest_by_name or version > highest_by_name[name]:
                 highest_by_name[name] = version
     for name, version in highest_by_name.items():
-        print '    *** noting new form %r' % name
+        print '    *** noting new form "%s"' % name
         form = formlib.load(name, version)
         formrow = db.new_row('forms')
         formrow.label = name

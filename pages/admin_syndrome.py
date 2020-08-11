@@ -54,7 +54,7 @@ class PageOps(page_common.PageOpsBase):
         ctx.admin_log(ctx.locals.group_edit.db_desc())
         ctx.locals.group_edit.db_update()
         globals.db.commit()
-        ctx.add_message('Updated %s %r' % (config.syndrome_label.lower(), synd.name))
+        ctx.add_message('Updated %s "%s"' % (config.syndrome_label.lower(), synd.name))
         globals.notify.notify('syndromes')
         globals.notify.notify('syndrome_units')
 

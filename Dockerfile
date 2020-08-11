@@ -26,7 +26,6 @@ COPY --from=build-base /build/*.whl /tmp/
 RUN pip install /tmp/*.whl; rm /tmp/*.whl
 
 RUN easy_install egenix-mx-base
-#RUN apt-get install -y libapache2-mod-python
 
 WORKDIR /src
 ADD . .

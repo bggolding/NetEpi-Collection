@@ -123,7 +123,7 @@ class SrcLoader:
         elif self.mode == 'positional':
             self.n_cols = None
         else:
-            raise DataImpError('Unknown import rule mode %r' % mode)
+            raise DataImpError('Unknown import rule mode "%s"' % mode)
 
     def __getstate__(self):
         raise TypeError('Cannot pickle %s' % self.__class__)
@@ -134,12 +134,12 @@ class SrcLoader:
             try:
                 index = self.col_map[name.strip().lower()]
             except KeyError:
-                raise DataImpError('Column %r not found in this source' % name)
+                raise DataImpError('Column "%s" not found in this source' % name)
         elif self.mode == 'positional':
             try:
                 index = int(name.strip()) - 1
             except (TypeError, ValueError):
-                raise DataImpError('Invalid column index %r' % name)
+                raise DataImpError('Invalid column index "%s"' % name)
         return index
 
     def __iter__(self):

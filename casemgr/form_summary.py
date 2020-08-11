@@ -79,7 +79,7 @@ class EditForm(object):
             import traceback
             traceback.print_exc()
             # This is a user app, so we hide the scary error
-            raise form_ui.FormError('the %r form type is unavailable due to '
+            raise form_ui.FormError('the "%s" form type is unavailable due to '
                                     'problems with it\'s structure' % 
                                         self.label)
 
@@ -200,7 +200,7 @@ def _getform(label, syndrome_id=None):
         subq.where('syndrome_id = %s', syndrome_id)
     form = query.fetchone()
     if form is None:
-        raise form_ui.FormError('Nonexistent form: %r' % label)
+        raise form_ui.FormError('Nonexistent form: "%s"' % label)
     return form
 
 
@@ -219,7 +219,7 @@ def new_form(syndrome_id, case_id, label):
         query.where('form_label = %s', form.label)
         query.where('NOT deleted')
         if query.aggregate('count(summary_id)') > 0:
-            raise form_ui.FormError('The %r form has already been'
+            raise form_ui.FormError('The "%s" form has already been'
                                     ' completed' % form.name)
     return EditForm(case_id, form)
 

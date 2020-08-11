@@ -105,7 +105,7 @@ class CasesetOps(pageops.PageOpsBase):
             cs.append(case_id)
             ctx.locals.casesets.save(cs)
             globals.db.commit()
-        ctx.msg('info', 'Added ID %s to case set %r' % (case_id, cs.name))
+        ctx.msg('info', 'Added ID %s to case set "%s"' % (case_id, cs.name))
         if ctx.locals.caseset is None:
             ctx.locals.caseset = cs
 

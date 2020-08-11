@@ -263,7 +263,7 @@ class FormFieldOps(FieldOps):
         try:
             info.load().columns.find_input(self.term.field)
         except KeyError:
-            msgs.msg('err', 'Form %r has been updated, filter field %r has '
+            msgs.msg('err', 'Form "%s" has been updated, filter field "%s" has '
                             'been deleted' % (info.label, self.term.field))
             return False
         return True
@@ -399,7 +399,7 @@ def make_term(op, **kw):
     try:
         cls = terms_by_op[op.lower()]
     except KeyError:
-        raise Error('Unknown filter operator %r' % op)
+        raise Error('Unknown filter operator "%s"' % op)
     try:
         return cls(**kw)
     except Exception:
@@ -558,9 +558,9 @@ class PatternTerm(TermBase):
 
     def desc(self):
         if boolstr(self.negate):
-            return 'not matching pattern %r' % self.value
+            return 'not matching pattern "%s"' % self.value
         else:
-            return 'matching pattern %r' % self.value
+            return 'matching pattern "%s"' % self.value
 
 
 class PhoneticTerm(TermBase):
@@ -568,7 +568,7 @@ class PhoneticTerm(TermBase):
     op = 'phonetic'
 
     def desc(self):
-        return 'phonetically matches %r' % self.value
+        return 'phonetically matches "%s"' % self.value
 
 
 class RangeTerm(TermBase):

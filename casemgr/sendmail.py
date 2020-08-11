@@ -24,7 +24,7 @@ value_addr_re = re.compile(r'^[a-z][a-z0-9_.-]*@([a-z_-]+\.)*[a-z_-]+$',
                            re.IGNORECASE)
 def valid_addr(addr):
     if not value_addr_re.match(addr):
-        raise Errors.MessageError('invalid address %r' % addr)
+        raise Errors.MessageError('invalid address "%s"' % addr)
 
 class Sendmail:
     """

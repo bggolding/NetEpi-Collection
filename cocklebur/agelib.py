@@ -106,7 +106,7 @@ class Age(object):
                     units = 'y'
             return cls(age, units)
         except (KeyError, ValueError):
-            raise Error('Unknown age format: %r' % agestr)
+            raise Error('Unknown age format: %s' % agestr)
     parse = classmethod(parse)
 
     def from_dob(cls, dob, now=None):
@@ -116,7 +116,7 @@ class Age(object):
         if hasattr(dob, 'mx'):
             dob = dob.mx()
         elif not isinstance(dob, DateTime.DateTimeType):
-            raise TypeError('bad date-of-birth type %r' % dob)
+            raise TypeError('bad date-of-birth type %s' % dob)
         if now is None:
             now = DateTime.now()
         if dob > now:
@@ -213,7 +213,7 @@ def parse_dob_or_age(value, now=None):
     try:
         return datetime.mx_parse_date(value).mx(), PREC_DOB
     except Error:
-        raise Error('Invalid DOB/age %r' % value)
+        raise Error('Invalid DOB/age %s' % value)
 
 
 def dob_query(query, field, dob, prec):
@@ -284,7 +284,7 @@ def to_db(value, row, field='DOB'):
                 dob = datetime.mx_parse_date(value).mx()
                 prec = PREC_DOB
             except Error:
-                raise Error('Invalid DOB/age %r' % value)
+                raise Error('Invalid DOB/age: %s' % value)
     else:
         dob = value
         prec = PREC_DOB

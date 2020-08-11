@@ -58,7 +58,7 @@ def parse_line(line):
         try:
             name, value = field.split('=', 1)
         except ValueError:
-            raise ParseError('could not parse %r' % line)
+            raise ParseError('could not parse "%s"' % line)
         record[name] = value
     return record
 
@@ -328,7 +328,7 @@ def parse_datetime_opt(date):
             try:
                 t = time.strptime(date, '%Y-%m-%d')
             except ValueError:
-                raise ParseError('Cannot parse date %r (use ISO YYYY-MM-DD '
+                raise ParseError('Cannot parse date "%s" (use ISO YYYY-MM-DD '
                                  'format)' % date)
     return time.mktime(t)
 

@@ -47,7 +47,7 @@ class PageOps(page_common.PageOpsBase):
         globals.db.commit()
         if queue_updated:
             globals.notify.notify('workqueues', ctx.locals.queue.queue_id)
-        ctx.add_message('Updated queue %r' % ctx.locals.queue.name)
+        ctx.add_message('Updated queue "%s"' % ctx.locals.queue.name)
 
     def revert(self, ctx):
         ctx.locals.unit_pt_search.db_revert()
@@ -63,14 +63,14 @@ class PageOps(page_common.PageOpsBase):
     def do_delete(self, ctx, ignore):
         if ctx.locals.queue.queue_id:
             if ctx.locals.queue_stats.active:
-                raise page_common.PageError('workqueue %r cannot be deleted as it has outstanding tasks' % ctx.locals.queue.name)
+                raise page_common.PageError('workqueue "%s" cannot be deleted as it has outstanding tasks' % ctx.locals.queue.name)
             if not self.confirmed:
                 raise ConfirmDelete(message='Deleting this task queue will irreversably delete %d completed task records' % ctx.locals.queue_stats.completed)
             else:
                 tasks.delete_queue(ctx.locals.queue.queue_id)
                 globals.db.commit()
                 globals.notify.notify('workqueues', ctx.locals.queue.queue_id)
-        ctx.add_message('Deleted queue %r' % ctx.locals.queue.name)
+        ctx.add_message('Deleted queue "%s"' % ctx.locals.queue.name)
         ctx.pop_page()
 
     def do_unit_pt_search(self, ctx, op, *args):

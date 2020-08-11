@@ -55,10 +55,10 @@ class QuestionEditInfo:
 
     def check_column_name(self, name):
         if name in self.other_column_names:
-            raise QuestionNameError('field name %r already used by another '
+            raise QuestionNameError('field name "%s" already used by another '
                                     'question' % name)
         elif name in self.question_column_names:
-            raise QuestionNameError('field name %r used more than once in '
+            raise QuestionNameError('field name "%s" used more than once in '
                                     'this question' % name)
         try:
             dbobj.valid_identifier(name)
@@ -68,10 +68,10 @@ class QuestionEditInfo:
 
     def check_condition_name(self, name):
         if name in self.other_condition_names:
-            raise QuestionNameError('condition name %r already used by another '
+            raise QuestionNameError('condition name "%s" already used by another '
                                     'question' % name)
         elif name in self.question_condition_names:
-            raise QuestionNameError('condition name %r used more than once in '
+            raise QuestionNameError('condition name "%s" used more than once in '
                                     'this question' % name)
         self.question_condition_names.add(name)
 

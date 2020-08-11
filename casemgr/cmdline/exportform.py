@@ -36,7 +36,7 @@ def main(args):
         query.where('label=%s', name)
         row = query.fetchone()
         if row is None:
-            cmdcommon.abort('Unknown form %r', name)
+            cmdcommon.abort('Unknown form "%s"', name)
         version = row.cur_version
     else:
         sys.exit('Usage: %s exportform <name> [version]')

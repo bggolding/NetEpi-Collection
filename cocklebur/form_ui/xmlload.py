@@ -118,7 +118,7 @@ class FormXMLParse(xmlparse.XMLParse):
                 raise xmlparse.ParseError('<input> tag requires a "type" attribute')
             input_cls = getattr(inputs, input_type, None)
             if input_cls is None or input_type not in inputs.__all__:
-                raise xmlparse.ParseError('Unknown <input> type %r' % input_type)
+                raise xmlparse.ParseError('Unknown <input> type "%s"' % input_type)
             direction = self.attrs.pop('direction', None)
             if direction:
                 self.attrs['direction'] = direction

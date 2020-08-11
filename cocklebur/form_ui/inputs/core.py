@@ -97,7 +97,7 @@ class CheckBoxes(inputbase.ChoicesBase):
         inputbase.ChoicesBase.__init__(self, column, **kwargs)
         for value, label in self.choices:
             if (len(self.column) + len(value)) > common.max_identifier_len:
-                raise common.FormDefError('column %r choice %r combined are too long (max %d)' % (self.column, value, common.max_identifier_len))
+                raise common.FormDefError('column "%s" choice "%s" combined are too long (max %d)' % (self.column, value, common.max_identifier_len))
 
     def get_column_names(self):
         return [(self.column + name).lower() for name, label in self.choices]

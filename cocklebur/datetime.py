@@ -167,7 +167,7 @@ class DatetimeFormat(object):
         try:
             return cls(DateTime.strptime(t, fmt))
         except DateTime.Error, e:
-            raise Error('date/time %r does not match format %r' % (t, fmt))
+            raise Error('date/time "%s" does not match format "%s"' % (t, fmt))
         except ValueError, e:
             raise Error(str(e))
     strptime = classmethod(strptime)
@@ -285,7 +285,7 @@ class mx_parse_time(DatetimeFormat):
             except DateTime.Error:
                 raise Error('invalid time "%s"' % arg)
         if self._value is not None and self._value.day:
-            raise Error('invalid time %r' % arg)
+            raise Error('invalid time "%s"' % arg)
     __getstate__ = DatetimeFormat.__getstate__
     __setstate__ = DatetimeFormat.__setstate__
 
@@ -517,7 +517,7 @@ def set_date_style(new_datestyle):
             format = '%Y-%m-%d'
             help = 'yyyy-mm-dd'
         else:
-            raise Error('Unknown date format %r' % format)
+            raise Error('Unknown date format "%s"' % format)
         datestyle = new_datestyle
         mx_parse_date.format = format
         mx_parse_date.help = help

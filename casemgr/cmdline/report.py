@@ -34,7 +34,7 @@ def csv_table(options, cred, params):
     try:
         params.export_rows
     except AttributeError:
-        cmdcommon.abort('report type %r does not support CSV export' % 
+        cmdcommon.abort('report type "%s" does not support CSV export' % 
                         params.report_type)
     msgs = params.check()
     if msgs.have_errors():
@@ -105,4 +105,4 @@ def main(args):
             optp.error('Specify an output file (--outfile)')
         image_out(cred, params, options.outfile)
     else:
-        cmdcommon.abort('Report type %r not supported by command line interface' % params.report_type)
+        cmdcommon.abort('Report type "%s" not supported by command line interface' % params.report_type)

@@ -208,7 +208,7 @@ class FormLibPyFiles(FormLibBase):
         self._lock()
         try:
             if self.versions(newname):
-                raise DuplicateFormError('form name %r is already used' % 
+                raise DuplicateFormError('form name "%s" is already used' % 
                                          newname)
             count = 0
             for ff in self:
@@ -217,7 +217,7 @@ class FormLibPyFiles(FormLibBase):
                     count += 1
 
             if not count:
-                raise NoFormError('No form %r' % (oldname))
+                raise NoFormError('No form "%s"' % (oldname))
         finally:
             self._unlock()
 
@@ -234,7 +234,7 @@ class FormLibPyFiles(FormLibBase):
                     except OSError:
                         pass
             if not count:
-                raise NoFormError('No form %r' % (name))
+                raise NoFormError('No form "%s"' % (name))
         finally:
             self._unlock()
 
@@ -301,7 +301,7 @@ class FormLibXMLDB(FormLibBase):
         query.where('version = %s', version)
         row = query.fetchone()
         if row is None:
-            raise NoFormError('No form %r, version %d' % (name, version))
+            raise NoFormError('No form "%s", version %d' % (name, version))
         form = xmlload(StringIO(row.xmldef))
         self._update(form, name, version)
         return form
@@ -309,14 +309,14 @@ class FormLibXMLDB(FormLibBase):
     def rename(self, oldname, newname):
         self.db.lock_table(self.table, 'EXCLUSIVE')
         if self.versions(newname):
-            raise DuplicateFormError('form name %r is already used' % newname)
+            raise DuplicateFormError('form name "%s" is already used' % newname)
         curs = self.db.cursor()
         try:
             dbobj.execute(curs, 
                           'UPDATE %s SET name=%%s WHERE name=%%s' % self.table,
                           (newname, oldname))
             if curs.rowcount == 0:
-                raise NoFormError('No form %r' % oldname)
+                raise NoFormError('No form "%s"' % oldname)
         finally:
             curs.close()
 
@@ -327,6 +327,6 @@ class FormLibXMLDB(FormLibBase):
             dbobj.execute(curs, 
                           'DELETE FROM %s WHERE name=%%s' % self.table, (name,)) 
             if curs.rowcount == 0:
-                raise NoFormError('No form %r' % name)
+                raise NoFormError('No form "%s"' % name)
         finally:
             curs.close()

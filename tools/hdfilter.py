@@ -57,7 +57,7 @@ def parse_seat_row(seat):
         return
     match = row_re.match(seat)
     if not match:
-        raise ParseError('Could not parse seat: %r' % seat)
+        raise ParseError('Could not parse seat: "%s"' % seat)
     return int(match.group(1))
 
 

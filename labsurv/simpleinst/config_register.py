@@ -38,7 +38,7 @@ class ConfigCmdLine(ConfigBase):
             try:
                 a, v = arg.split('=')
             except ValueError:
-                sys.exit('Unknown command line option: %r' % arg)
+                sys.exit('Unknown command line option: "%s"' % arg)
             try:
                 t = type(getattr(config, a))
             except AttributeError:

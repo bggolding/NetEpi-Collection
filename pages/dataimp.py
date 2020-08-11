@@ -64,7 +64,7 @@ class PageOps(page_common.PageOpsBase):
     def commit(self, ctx):
         ctx.locals.editor.save()
         globals.db.commit()
-        ctx.add_message('Rule set %r saved' % 
+        ctx.add_message('Rule set "%s" saved' % 
                         ctx.locals.editor.importrules.name) 
 
     # Tab actions

@@ -219,14 +219,14 @@ class CrosstabDemogAxisParamsMeths:
             try:
                 field = self.params.demog_fields().field_by_name(self.field)
             except KeyError:
-                msgs.msg('err', '%r input no longer available' % self.field)
+                msgs.msg('err', '"%s" input no longer available' % self.field)
                 self.field = ''
 
     def get_axis(self, form_name):
         try:
             field = self.params.demog_fields().field_by_name(self.field)
         except KeyError:
-            raise Error('demographic field %r not found' % self.field)
+            raise Error('demographic field "%s" not found' % self.field)
         return DemogAxis(field.table, field.name, 
                             field.label, field.optionexpr())
 
@@ -261,11 +261,11 @@ class CrosstabFormAxisParamsMeths:
     def get_axis(self, form_name):
         form = self.params.form_info(form_name).load()
         if form is None:
-            raise Error('Form %r not found' % form_name)
+            raise Error('Form "%s" not found' % form_name)
         try:
             input = form.columns.find_input(self.field)
         except KeyError:
-            raise Error('field %r on form %r not found' % 
+            raise Error('field "%s" on form "%s" not found' % 
                         (self.field, form_name))
         return FormAxis(form.name, form.version, form.table,
                         self.field, input.label, input.get_choices())
@@ -342,9 +342,9 @@ class CrosstabParams:
         elif name == 'page':
             axis = self.page
         else:
-            raise Error('Bad cross-tab axis name: %r' % name)
+            raise Error('Bad cross-tab axis name: "%s"' % name)
         if type not in ('none', 'demog', 'form'):
-            raise Error('Bad cross-tab axis type: %r' % type)
+            raise Error('Bad cross-tab axis type: "%s"' % type)
         axis.form_name = '%s:%s' % (type, form)
         axis.field = field
 

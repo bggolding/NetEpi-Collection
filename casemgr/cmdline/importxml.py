@@ -74,10 +74,10 @@ class SyndromeCache(dict):
             matches = [synd for synd in syndrome.syndromes
                        if patre.match(synd.name) is not None]
             if not matches:
-                cmdcommon.abort('No syndromes match %r' % pattern)
+                cmdcommon.abort('No syndromes match "%s"' % pattern)
             if len(matches) > 1:
                 names = [synd.name for synd in matches]
-                cmdcommon.abort('More than one syndrome name match %r: %s' % 
+                cmdcommon.abort('More than one syndrome name match "%s": %s' % 
                          (pattern, ', '.join(names)))
             self[pattern] = matches[0]
             return matches[0]
@@ -133,7 +133,7 @@ def proc_forms(options, synd, case, case_elem):
             formdataimp = formdataimpcache.get(synd.syndrome_id, form_name, 
                                                options.data_src)
         except form_summary.form_ui.FormError:
-            raise TagError('Can\'t find %r form for syndrome %d: %s' % (form_name, synd.syndrome_id, synd.name))
+            raise TagError('Can\'t find "%s" form for syndrome %d: %s' % (form_name, synd.syndrome_id, synd.name))
         edit_form, form_data = formdataimp.edit(case.case_row.case_id)
         copy_node(form_elem, form_data)
         edit_form.update()

@@ -30,7 +30,7 @@ class Matcher:
         try:
             self.index = header.index(self.field)
         except ValueError:
-            raise Error('column %r not found' % self.field)
+            raise Error('column "%s" not found' % self.field)
 
 
 class Include(Matcher):

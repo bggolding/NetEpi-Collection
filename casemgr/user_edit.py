@@ -225,7 +225,7 @@ class Sponsor(UserEditBase):
         self.add_unit(self.cred.unit.unit_id)
 
     def done(self):
-        self.messages.msg('info', 'An invitation has been sent to %r' % 
+        self.messages.msg('info', 'An invitation has been sent to "%s"' % 
                                 self.user.email)
 #        self.messages.msg('info', 'Key is %s' % self.user.enable_key)
 
@@ -330,7 +330,7 @@ class AdminCommon(UserEditBase):
         self.was_enabled = self.user.enabled
         self.rights = list(credentials.Rights(self.user.rights))
         if not self.user.is_new():
-            self.title = 'Edit details for user %r - %s' % (
+            self.title = 'Edit details for user "%s" - %s' % (
                     self.user.username, self.user.fullname)
 
     def reset_attempts(self):

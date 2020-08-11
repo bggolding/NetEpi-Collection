@@ -88,7 +88,7 @@ class TaskDescriptions(cached.NotifyCache):
         try:
             return self.desc_params_by_name[name]
         except KeyError:
-            raise TaskDescError('Task description %r not available' % name)
+            raise TaskDescError('Task description "%s" not available' % name)
 
 task_desc_by_syndrome = {}
 

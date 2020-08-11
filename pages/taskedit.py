@@ -39,7 +39,7 @@ class PageOps(page_common.PageOpsBase):
         ctx.locals.task = None
   
     def msg(self, ctx, op):
-        ctx.add_message('%s %r task' % (op, 
+        ctx.add_message('%s "%s" task' % (op, 
                         ctx.locals.edittask.task_description))
 
     def do_close(self, ctx, ignore):

@@ -90,5 +90,5 @@ else:
     except AttributeError:
         pass
 if main is None:
-    sys.exit('Unknown mode %r. See "%s help"' % (mode, ourname))
+    sys.exit('Unknown mode "%s". See "%s help"' % (mode, ourname))
 main(sys.argv[1:])

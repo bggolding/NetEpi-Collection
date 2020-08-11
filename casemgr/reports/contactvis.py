@@ -63,7 +63,7 @@ def run_graphviz(dot, vismode, outputtype, outputdir=None, filename=None):
     if vismode in okay_modes:
         path = exepath(vismode)
     if not path:
-        raise Error('Visualisation tool %r not found' % vismode)
+        raise Error('Visualisation tool "%s" not found' % vismode)
     if filename:
         tw = os.open(filename, os.O_CREAT|os.O_WRONLY, 0666)
         fn = filename
@@ -90,7 +90,7 @@ def run_graphviz(dot, vismode, outputtype, outputdir=None, filename=None):
             raise
         if status == 0:
             return os.path.basename(fn)
-        raise Error('Graphviz %r failed' % path)
+        raise Error('Graphviz "%s" failed' % path)
     else:
         os.close(pw)
         os.dup2(pr, 0)
@@ -286,7 +286,7 @@ class ContactVisParamsMixin:
     def _check(self, msgs):
         okay_modes = set([name for name, label in self.vismode_options()])
         if self.vismode not in okay_modes:
-            msgs.msg('err', 'Visualisation tool %r not available (GraphViz not '
+            msgs.msg('err', 'Visualisation tool "%s" not available (GraphViz not '
                             'installed?)' % self.vismode)
 
     def report(self, creds, msgs, filename=None):

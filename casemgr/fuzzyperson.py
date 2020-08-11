@@ -15,7 +15,7 @@
 #
 #   Contributors: See the CONTRIBUTORS file for details of contributions.
 #
-import string
+import re
 import itertools
 
 from cocklebur import dbobj
@@ -23,13 +23,13 @@ from casemgr.nickcache import get_nicks
 from casemgr.phonetic_encode import dmetaphone
 
 
-transmap = string.maketrans('-,', '  ')
+word_pat = re.compile(r'[ -,]+')
 
 def encode_phones(*fields):
     word_phones = []
     for field in fields:
         if field:
-            words = field.lower().translate(transmap).split()
+            words = word_pat.split(field.lower())
             wordnicks = get_nicks(words)
             for nicks in wordnicks:
                 word_phones.append([dmetaphone(nick) for nick in nicks])

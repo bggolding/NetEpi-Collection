@@ -43,6 +43,8 @@ services:
   proxy:
     build:
       context: proxy
+    environment:
+      TZ: Australia/Melbourne
     ports:
       - "9943:443"
 

@@ -93,7 +93,7 @@ class ColProc(object):
     def set(self, ns, value):
         if (value is not None and self.options is not None 
                 and value not in self.options):
-            raise Error('%r not a valid choice' % value)
+            raise Error('"%s" not a valid choice' % value)
         setattr(ns, self.target, value)
 
 
@@ -196,7 +196,7 @@ class DemogGroup(GroupBase):
                 elif isinstance(rule, elements.ImportIgnore):
                     continue
                 else:
-                    raise Error('unknown rule type: %r' % rule)
+                    raise Error('unknown rule type: "%s"' % rule)
                 if field.optionexpr is not None:
                     args['options'] = set([v[0] for v in field.optionexpr()])
                 col_proc = method(**args)
@@ -204,7 +204,7 @@ class DemogGroup(GroupBase):
                 if field.name == 'local_case_id':
                     importer.key_proc = col_proc
             except Error, e:
-                importer.error('field %r: %s' % (field.label, e))
+                importer.error('field "%s": %s' % (field.label, e))
 
     def apply(self, importer, case, row):
         for col_proc in self.col_procs:
@@ -286,12 +286,12 @@ class FormGroup(GroupBase):
                 elif isinstance(rule, elements.ImportIgnore):
                     continue
                 else:
-                    raise Error('unknown rule type: %r' % rule)
+                    raise Error('unknown rule type: "%s"' % rule)
                 if hasattr(input, 'choices'):
                     args['options'] = set([v[0] for v in input.choices])
                 self.col_procs.append(method(**args))
             except Error, e:
-                importer.error('form %r input %r: %s' % (self.label, label, e))
+                importer.error('form "%s" input "%s": %s' % (self.label, label, e))
 
     def apply(self, importer, ns, row):
         for col_proc in self.col_procs:
@@ -428,7 +428,7 @@ class DataImp(ImportBase):
                                                 local_case_id=key)
                     except dbobj.IntegrityError:
 
-                        self.error('%r %s is not unique' % (self.key_proc.label, key))
+                        self.error('"%s" %s is not unique' % (self.key_proc.label, key))
                         continue
                 if (case is not None 
                         and case.person.data_src != self.importrules.srclabel):

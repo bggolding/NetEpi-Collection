@@ -307,7 +307,7 @@ class FormCols(ReportColsBase):
             try:
                 form.columns.find_input(c.name)
             except KeyError:
-                msgs.msg('err', 'Form %r has been updated, report field %r has '
+                msgs.msg('err', 'Form "%s" has been updated, report field "%s" has '
                                 'been deleted' % (form.label, c.label))
             else:
                 c.name = c.name.lower()
@@ -397,7 +397,7 @@ class OutcolsParamsMixin:
         elif type == 'form':
             group = FormCols(self, label, form)
         else:
-            raise Error('Unknown report group type %r' % type)
+            raise Error('Unknown report group type "%s"' % type)
         self.outgroups.append(group)
         return group
 

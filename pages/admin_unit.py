@@ -43,7 +43,7 @@ class PageOps(page_common.PageOpsBase):
         ctx.admin_log(ctx.locals.group_edit.db_desc())
         ctx.locals.group_edit.db_update()
         globals.db.commit()
-        ctx.add_message('Updated %s %r' % (config.unit_label.lower(), unit.name))
+        ctx.add_message('Updated %s "%s"' % (config.unit_label.lower(), unit.name))
         globals.notify.notify('units', unit.unit_id)
         globals.notify.notify('unit_groups', unit.unit_id)
         globals.notify.notify('syndrome_units', unit.unit_id)
@@ -84,7 +84,7 @@ class PageOps(page_common.PageOpsBase):
     def do_delete(self, ctx, ignore):
         credentials.delete_unit(ctx.locals.unit)
         globals.db.commit()
-        ctx.add_message('Deleted unit %r' % ctx.locals.unit.name)
+        ctx.add_message('Deleted unit "%s"' % ctx.locals.unit.name)
         ctx.pop_page()
 
     def do_group_edit(self, ctx, op, *args):

@@ -108,7 +108,7 @@ def age_to_float(age):
                     return float(age[:-len(suffix)].rstrip()) / divisor
         return float(age)
     except ValueError:
-        raise ReportError('Unknown age format: %r' % age)
+        raise ReportError('Unknown age format: "%s"' % age)
 
 
 def float_to_age(age):

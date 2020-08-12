@@ -115,7 +115,7 @@ class PageOps(page_common.PageOpsBase, caseset_ops.CasesetOps):
         self.check_unsaved_or_confirmed(ctx)
         case_id = ctx.locals.case.case_row.case_id
         log = logview.CaseLogView(ctx.locals._credentials.prefs, 
-                                  'Log for Case ID %r' % case_id,
+                                  'Log for Case ID "%s"' % case_id,
                                   case_id=case_id)
         ctx.push_page('logview', log)
 

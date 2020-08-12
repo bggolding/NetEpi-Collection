@@ -143,28 +143,28 @@ def is_pg_keyword(word):
     return word.upper() in pg_keywords
 
 max_identifier_len = 63
-valid_identifier_re = re.compile('^[a-z][a-z0-9_]*$', re.IGNORECASE)
+valid_identifier_re = re.compile(r'^[a-z][a-z0-9_]*$', re.IGNORECASE)
 
 def valid_identifier(name, label='identifier', reserve=0, strict=True):
     if not isinstance(name, basestring):
-        raise dbapi.IdentifierError('%s %r must be a string' % (label, name))
+        raise dbapi.IdentifierError('%s "%s" must be a string' % (label, name))
     if len(name) + reserve > max_identifier_len:
-        raise dbapi.IdentifierError('%s %r must be less than %d characters' % 
+        raise dbapi.IdentifierError('%s "%s" must be less than %d characters' % 
                               (label, name, max_identifier_len - reserve))
     if not valid_identifier_re.match(name):
-        raise dbapi.IdentifierError('%s %r contains invalid characters - use ' 
+        raise dbapi.IdentifierError('%s "%s" contains invalid characters - use ' 
             'leading letter, then letters, numbers and _ only' % (label, name))
     if ((strict and is_sql_keyword(name)) 
             or (not strict and is_pg_keyword(name))):
-        raise dbapi.IdentifierError('%s %r must not be an SQL reserved word' %
+        raise dbapi.IdentifierError('%s "%s" must not be an SQL reserved word' %
                               (label, name))
 
 
-_tablecols_re = re.compile('^(\w+)\s*(?:\(([^)]*)\))?$')
+_tablecols_re = re.compile(r'^(\w+)\s*(?:\(([^)]*)\))?$')
 def parse_tablecols(tablecols):
     match = _tablecols_re.match(tablecols)
     if not match:
-        raise ValueError('Invalid SQL table(column, ...) specification: %r' %
+        raise ValueError('Invalid SQL table(column, ...) specification: "%s"' %
                          tablecols)
     table, columns = match.groups()
     if columns:

@@ -384,18 +384,23 @@ class CaseExporter:
         # Collect names of all forms *in use* for this syndrome
         # as well as summary_ids, etc
         query = globals.db.query('cases', distinct=True)
+        # if deleted == 'n':
+        #     query.join('LEFT JOIN case_form_summary'
+        #                ' ON (cases.case_id = case_form_summary.case_id'
+        #                    ' AND NOT case_form_summary.deleted)')
         query.join('LEFT JOIN case_form_summary USING (case_id)')
         query.where('syndrome_id = %s', syndrome_id)
-        if deleted == 'n':
-            query.where('NOT case_form_summary.deleted')
         caseaccess.acl_query(query, self.credentials, deleted=deleted)
         forms_used = set()
         self.export_cases = ExportCases()
         row_formatter_cls = row_formatters[self.format]
         self.row_formatter = row_formatter_cls(self.format, self.strip_newlines)
         rows = query.fetchcols(('cases.case_id', 
-                                'summary_id', 'form_label', 'form_version'))
-        for case_id, summary_id, form_name, form_version in rows:
+                                'summary_id', 'form_label', 'form_version',
+                                'case_form_summary.deleted AS form_deleted'))
+        for case_id, summary_id, form_name, form_version, form_deleted in rows:
+            if deleted == 'n' and form_deleted:
+                continue
             self.export_cases.add_summ_id(case_id, summary_id,
                                           form_name, form_version)
             if summary_id is not None:

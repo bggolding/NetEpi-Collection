@@ -2,6 +2,11 @@
 # Build the base image (minimal distro packages needed to run)
 FROM python:2.7-slim AS base
 
+# DO NOT apt-get any packages that depend on python when using the python
+# base images - these images do not have a debian python package installed,
+# and installing a package that depends on python will install the debian
+# python, breaking the image python.
+
 RUN apt-get update && apt-get install -y libpq5 apache2 libapache2-mod-fcgid wget less
 RUN pip install pip --upgrade
 

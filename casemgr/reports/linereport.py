@@ -49,7 +49,7 @@ def get_formdata_by_case(output_rows, case_ids):
         try:
             summids_by_form[(name, version)].append(summary_id)
         except KeyError:
-            formdata_by_summid[summary_id] = 'Omitted data from incompatible form %r, version %s' % (name, version)
+            formdata_by_summid[summary_id] = 'Omitted data from incompatible form "%s", version %s' % (name, version)
         case_form_summids.setdefault(name, []).append(summary_id)
     # Now fetch form data by form
     for (form_name, form_version), summids in summids_by_form.iteritems():

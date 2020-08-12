@@ -208,7 +208,7 @@ class _UG(Upgrades):
                 try:
                     form = entry.load()
                 except form_ui.FormError, e:
-                    raise 'ERROR loading %r: %s' % (entry, e)
+                    raise 'ERROR loading "%s": %s' % (entry, e)
                 else:
                     dstlib.save(form, entry.name, entry.version)
 

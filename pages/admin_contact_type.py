@@ -48,7 +48,7 @@ class PageOps(page_common.PageOpsBase):
             except dbobj.DuplicateKeyError:
                 raise dbobj.DuplicateKeyError('Name is already used')
             globals.db.commit()
-            ctx.msg('info', 'Renamed contact type %r to %r' % 
+            ctx.msg('info', 'Renamed contact type "%s" to "%s"' % 
                         (ctx.locals.contact_type.name, 
                         ctx.locals.contact_type.new_name))
             ctx.pop_page()
@@ -59,11 +59,11 @@ class PageOps(page_common.PageOpsBase):
             return
         if not self.confirmed:
             raise MergeConfirm(message='This will merge %d contact(s) of type '
-                               '%r into %r. This cannot be undone. Are you '
+                               '"%s" into "%s". This cannot be undone. Are you '
                                'sure you wish to proceed?' % 
                              (ct.count, ct.name, ct.type_label(ct.merge_to_id)))
         ct.merge()
-        ctx.msg('info', 'Merged %d contact(s) of type %r to %r' % 
+        ctx.msg('info', 'Merged %d contact(s) of type "%s" to "%s"' % 
                         (ct.count, ct.name, ct.type_label(ct.merge_to_id)))
                      
         globals.db.commit()
@@ -73,11 +73,11 @@ class PageOps(page_common.PageOpsBase):
         ct = ctx.locals.contact_type
         if not self.confirmed:
             raise DeleteConfirm(message='This will delete %d contact(s) of '
-                                'type %r. This cannot be undone. Are you '
+                                'type "%s". This cannot be undone. Are you '
                                 'sure you wish to proceed?' % 
                                 (ct.count, ct.name))
         ct.delete()
-        ctx.msg('info', 'Deleted %d contact(s) of type %r' % 
+        ctx.msg('info', 'Deleted %d contact(s) of type "%s"' % 
                         (ct.count, ct.name))
         globals.db.commit()
         ctx.pop_page()

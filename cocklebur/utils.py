@@ -33,7 +33,7 @@ def commalist(fields, conjunction='or'):
     return '%s %s %s' % (', '.join(fields[:-1]), conjunction, fields[-1])
 
 
-comma_re = re.compile('\s*,\s*')
+comma_re = re.compile(r'\s*,\s*')
 def commasplit(buf):
     return comma_re.split(buf.strip())
 
@@ -101,4 +101,4 @@ def parse_addr(addr):
     match = rfc822_bare_addr_re.match(addr_no_comments)
     if match:
         return match.group(1).lower(), match.group(2).lower()
-    raise ValueError('Invalid e-mail address: %r' % addr)
+    raise ValueError('Invalid e-mail address: %s' % addr)

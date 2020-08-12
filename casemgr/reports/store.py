@@ -130,7 +130,7 @@ def _decode(row):
     try:
         params = _parse_file(StringIO(row.xmldef))
     except ReportParseError, e:
-        raise ReportLoadError, 'load %r: %s' % (row.label, e), sys.exc_info()[2]
+        raise ReportLoadError, 'load "%s": %s' % (row.label, e), sys.exc_info()[2]
     params.syndrome_id = row.syndrome_id
     params.label = params.loaded_label = row.label
     params.sharing = params.loaded_sharing = row.sharing

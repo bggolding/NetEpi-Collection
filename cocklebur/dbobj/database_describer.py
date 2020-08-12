@@ -81,7 +81,7 @@ class DSN(str):
         try:
             index = self._index[name]
         except KeyError:
-            raise AttributeError('DSN object has no attribute %r' % name)
+            raise AttributeError('DSN object has no attribute "%s"' % name)
         return self.split(':')[index]
 
     def get_kw(self):

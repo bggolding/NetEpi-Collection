@@ -54,7 +54,7 @@ class NGram(object):
                     ngram_count = len(word) - self.N + 1
                     i = 0
                     while i < ngram_count:
-                        ngrams.add(intern(word[i:i+self.N]))
+                        ngrams.add(word[i:i+self.N])
                         i += 1
         self.matches = None
         self.ngrams = tuple(ngrams)

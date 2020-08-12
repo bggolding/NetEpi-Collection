@@ -76,7 +76,7 @@ def bool_cvt(v):
     try:
         return bool_values[v.lower()]
     except KeyError:
-        raise ParseError('invalid boolean value: %r' % v)
+        raise ParseError('invalid boolean value: "%s"' % v)
 
 attr_cvt = {
     'int': int,
@@ -124,13 +124,13 @@ class Node(object):
         self.attrs = {}
         for attr in self.required_attrs:
             if attr not in attrs:
-                raise ParseError('<%s> tag requires %r attribute' %
+                raise ParseError('<%s> tag requires "%s" attribute' %
                                     (self.name, attr))
         for attr, value in attrs.items():
             try:
                 attr_cvt = self.attr_cvt[attr]
             except KeyError:
-                raise ParseError('unknown attribute %r on <%s> tag' % 
+                raise ParseError('unknown attribute "%s" on <%s> tag' % 
                                     (attr, self.name))
             if attr_cvt is not None:
                 try:

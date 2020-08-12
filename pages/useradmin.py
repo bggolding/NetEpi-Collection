@@ -40,7 +40,7 @@ class PageOps(page_common.PageOpsBase):
         query.where('user_id = %s', user_id)
         username = query.fetchone().username
         log = logview.UserLogView(ctx.locals._credentials.prefs, 
-                                  'Log for user %r' % username, 
+                                  'Log for user "%s"' % username, 
                                   user_id=user_id)
 
         ctx.push_page('logview', log)

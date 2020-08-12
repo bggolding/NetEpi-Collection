@@ -517,10 +517,10 @@ class Editor(object):
         for form in self.importrules.forms():
             info = self.syndrome().form_info(form.name)
             if info is None:
-                msgs.msg('err', 'Form %r no longer associated with this %s'%
+                msgs.msg('err', 'Form "%s" no longer associated with this %s'%
                          (form.name, config.syndrome_label))
             elif info.version != form.version:
-                msgs.msg('warn', 'Form %r definition has been updated - '
+                msgs.msg('warn', 'Form "%s" definition has been updated - '
                                  'check import rules' % info.label)
                 form.version = info.version
 
@@ -605,7 +605,7 @@ class Editor(object):
             query.where('import_defs_id != %s', self.def_id)
         query.where('name = %s', self.importrules.name)
         if query.fetchcols('import_defs_id'):
-            raise Error('Name %r already used' % self.importrules.name)
+            raise Error('Name "%s" already used' % self.importrules.name)
         # Update
         row.xmldef = self.rules_xml()
         row.name = self.importrules.name

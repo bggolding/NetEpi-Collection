@@ -26,7 +26,7 @@ all:
 	$(PYTHON) install.py $(COLLECTION_CONFIG)
 
 test:
-	(cd tests && $(PYTHON) all.py)
+	$(PYTHON) test.py
 
 liccheck:
 	@$(PYTHON) liccheck.py \

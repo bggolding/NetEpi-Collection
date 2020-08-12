@@ -40,7 +40,14 @@ services:
     build:
       context: albatross-session-server
 
+  proxy:
+    build:
+      context: proxy
+    ports:
+      - "9943:443"
+
 volumes:
+
   netepi-postgres-data:
     external: true
   netepi-pickled-db-describer:

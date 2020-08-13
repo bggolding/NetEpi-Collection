@@ -70,7 +70,7 @@ def get_platform():
             if platform.is_platform():
                 platforms.append(platform)
     if not platforms:
-        sys.exit('Unrecognised playform')
+        sys.exit('Unrecognised platform')
     if len(platforms) > 1:
         sys.exit('Ambiguous platform detection: %s' % \
                  ', '.join([p.platform for p in platforms]))

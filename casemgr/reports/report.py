@@ -324,7 +324,8 @@ class ContactVisReportParams(
                 contactvis.ContactVisParamsMixin,
                 reportfilters.FilterParamsMixin,
                 store.ParamSaveMixin,
-                ReportParamsBase):
+                ReportParamsBase,
+                OrderbyParamsMixin):
 
     report_type = 'contactvis'
     type_label = '%s visualisation' % config.contact_label

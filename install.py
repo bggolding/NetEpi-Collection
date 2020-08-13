@@ -51,7 +51,7 @@ config.install_logo = ''
 config.install_logo_small = ''
 
 # If this is a developer build, update SVN revision:
-svnrev = collect('svnversion %s 2> /dev/null' % config.base_dir)
+svnrev = collect('git rev-parse --short HEAD 2>/dev/null')
 if svnrev and svnrev != 'exported':
     f = open(os.path.join(config.base_dir, 'casemgr', 'svnrev.py'), 'w')
     f.write('__svnrev__ = %r\n' % svnrev)

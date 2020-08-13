@@ -85,7 +85,7 @@ class HandleExceptionMixin:
                 body.safeadd('Remote IP', req.get_remote_host())
                 body.safeadd('User agent', req.get_user_agent())
                 body.safeadd('App vers', version.__version__)
-                body.safeadd('SVN rev', version.__svnrev__)
+                body.safeadd('Git rev', version.__svnrev__)
                 body.safeadd('Py vers', sys.version.replace('\n', ''))
                 body.safeadd('Albatross vers', albatross.__version__)
                 body.safeadd('Page stack', page_stack)

@@ -8,8 +8,8 @@ RUN /usr/local/bin/generate-certs
 FROM nginx:alpine
 
 RUN apk add tzdata
-RUN cp /usr/share/zoneinfo/Australia/Melbourne /etc/localtime
-RUN echo "Australia/Melbourne" >/etc/timezone
+RUN echo "Australia/Melbourne" >/etc/timezone && \
+    cp /usr/share/zoneinfo/Australia/Melbourne /etc/localtime
 
 RUN rm /etc/nginx/conf.d/*
 COPY --from=certificate-generator /tmp/certs/cert.pem /tmp/certs/key.pem /etc/nginx/conf.d/netepi/

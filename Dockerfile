@@ -21,7 +21,7 @@ WORKDIR /build
 RUN pip wheel ocpgdb
 RUN wget -q http://www.object-craft.com.au/projects/albatross/download/${ALBATROSS}.tar.gz \
 	&& pip wheel ${ALBATROSS}.tar.gz
-RUN pip wheel matplotlib graphviz
+RUN pip wheel matplotlib
 
 #------------------------------------------------------------------------------
 # Revert to building from the smaller base image for the rest of the process
@@ -30,6 +30,7 @@ FROM base AS final
 COPY --from=build-base /build/*.whl /tmp/
 RUN pip install /tmp/*.whl; rm /tmp/*.whl
 
+RUN apt-get install -y graphviz
 RUN easy_install egenix-mx-base
 
 WORKDIR /src

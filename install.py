@@ -91,21 +91,17 @@ appname_filter = Filter(config, pattern=r'{{APPNAME}}',
                             subst=config.appname)
 
 # Sundry static content
-install(target = config.html_target, 
-        filter = appname_filter,
-        base = 'app', files = ['*.css', '*.js', '*.html',
-                                   'lang/*.js', 'help/*.html'])
+install(target=config.html_target,
+        filter=appname_filter,
+        base='app', files=['*.css', '*.js', '*.html', 'lang/*.js', 'help/*.html'])
 
 images = joinpath(config.html_target, 'images')
 image_exclude = []
 if config.install_logo:
-    image_exclude.append('netepi-bb.png')
-    copy(config.install_logo, joinpath(images, 'netepi-bb.png'), mode=0755)
-if config.install_logo_small:
-    image_exclude.append('netepi.png')
-    copy(config.install_logo_small, joinpath(images, 'netepi.png'), mode=0755)
-install(target = images, base = 'images', files = ['*.png', '*.ico'],
-        exclude = image_exclude)
+    image_exclude.append('netepi.svg')
+    copy(config.install_logo, joinpath(images, 'netepi.svg'), mode=0755)
+install(target=images, base='images', files=['*.png', '*.ico', '*.svg'],
+        exclude=image_exclude)
 
 make_dirs(joinpath(config.html_target, 'scratch'), config.web_user)
 

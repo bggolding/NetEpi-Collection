@@ -71,7 +71,7 @@ def make_dirs(dir, owner=None, config=None):
         dir = config.install_prefix + dir
     if type(owner) in (unicode, str):
         owner = user_lookup(owner)
-    if not os.path.exists(dir):
+    if dir and not os.path.exists(dir):
         par_dir = os.path.dirname(dir)
         make_dirs(par_dir, owner)
         os.mkdir(dir, 0755)

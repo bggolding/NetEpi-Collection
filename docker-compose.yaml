@@ -24,6 +24,7 @@ services:
   netepi:
     build:
       context: .
+    restart: always
     environment:
       ALBATROSS_SESSION_SERVER: albatross-session-server
       TZ: Australia/Melbourne
@@ -43,6 +44,7 @@ services:
   proxy:
     build:
       context: proxy
+    restart: always
     environment:
       TZ: Australia/Melbourne
     ports:
